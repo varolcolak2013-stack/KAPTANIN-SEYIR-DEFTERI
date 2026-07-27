@@ -638,18 +638,33 @@ function applyStaticLangText(){
   const langMenu=document.getElementById('langMenu');
   if(langBtn && langMenu){
     langBtn.textContent = LANG_NAMES[LANG] + ' ▾';
-    langMenu.innerHTML = LANGS.map(l=>
-      `<button type="button" data-lang="${l}" class="${l===LANG?'on':''}">${LANG_NAMES[l]}</button>`).join('');
-    langMenu.querySelectorAll('[data-lang]').forEach(btn=>{
-      btn.onclick=(e)=>{
+    while(langMenu.firstChild) langMenu.removeChild(langMenu.firstChild);
+    LANGS.forEach(l=>{
+      const item=document.createElement('button');
+      item.type='button';
+      item.dataset.lang=l;
+      item.textContent=LANG_NAMES[l];
+      item.style.display='block';
+      item.style.width='100%';
+      item.style.textAlign='left';
+      item.style.padding='9px 15px';
+      item.style.fontSize='13px';
+      item.style.fontFamily="'Inter',system-ui,sans-serif";
+      item.style.color = (l===LANG) ? '#C89B5C' : '#EDE6D6';
+      item.style.fontWeight = (l===LANG) ? '600' : '400';
+      item.style.background='none';
+      item.style.border='none';
+      item.style.cursor='pointer';
+      item.onclick=(e)=>{
         e.stopPropagation();
-        LANG=btn.dataset.lang;
+        LANG=l;
         localStorage.setItem('yy_lang',LANG);
         langMenu.classList.remove('open');
         applyStaticLangText();
         render();
         if(sheet.classList.contains('on')){drawMsgs();drawCtx();drawPending();}
       };
+      langMenu.appendChild(item);
     });
     if(!langBtn.dataset.wired){
       langBtn.dataset.wired='1';
