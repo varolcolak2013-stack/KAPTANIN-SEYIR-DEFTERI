@@ -230,10 +230,6 @@
         <h2 id="toptitle">Genel Bakış</h2>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
-        <div style="position:relative">
-          <button class="btn ghost sm" id="langBtn" type="button">Dil ▾</button>
-          <div id="langMenu" class="langmenu"></div>
-        </div>
         <label class="btn ghost sm" for="importFile" id="importLbl">İçe Aktar</label>
         <input type="file" id="importFile" accept="application/json" style="position:absolute;width:1px;height:1px;opacity:0">
         <button class="btn ghost sm" id="exportBtn">Yedek Al</button>
@@ -290,8 +286,7 @@ const ACCESS_CODE = 'MEIRA2026';
 const LANGS=['tr','en','ru','es','it'];
 const LANG_NAMES={tr:'Türkçe',en:'English',ru:'Русский',es:'Español',it:'Italiano'};
 const RESPOND_LANG={tr:'Turkish',en:'English',ru:'Russian',es:'Spanish',it:'Italian'};
-let LANG=localStorage.getItem('yy_lang')||'tr';
-if(!LANGS.includes(LANG))LANG='tr';
+let LANG='tr';
 
 const T={
 tr:{
